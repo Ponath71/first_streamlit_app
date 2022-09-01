@@ -52,6 +52,23 @@ try:
 except URLError as e:
     streamlit.error()
 
+#my_cur = my_cnx.cursor()
+#my_cur.execute("select * from fruit_load_list")
+#my_data_row = my_cur.fetchall()
+streamlit.header("The fruit list contains:")
+#Snowflake-related functions
+def get_fruit_load_list():
+    with my_cur.cursor() as my_cur:
+        my_cur.execute("select * from fruit_load_list")
+        return my_cur.fetchall()
+    
+ #add a vutton to load the fruit
+if streamlit.button('Get Fruit Load List'):
+    my_cnx = snowflake.connector.connect(**streamlit.secrets["snowflake"])
+    my_data_row = get_fruit_load_list()
+    streamlit.dataframe(my_data_row)
+    
+    
 # dont run anything past here while we trouble shoot
 streamlit.stop()
 
@@ -75,20 +92,22 @@ try:
 except URLError as e:    
   streamlit.error()
 
-my_cnx = snowflake.connector.connect(**streamlit.secrets["snowflake"])
+
 my_cur = my_cnx.cursor()
-# my_cur.execute("SELECT CURRENT_USER(), CURRENT_ACCOUNT(), CURRENT_REGION()")
 my_cur.execute("select * from fruit_load_list")
-# my_data_row = my_cur.fetchone()
-# streamlit.text("Hello from Snowflake:")
-## my_cur.execute("The fruit load list contains:")
-
-#streamlit.text("The fruit load list contains:")
-#streamlit.text(my_data_row)
-
 my_data_row = my_cur.fetchall()
 streamlit.header("The fruit list contains:")
-streamlit.dataframe(my_data_row)
+#Snowflake-related functions
+def get_fruit_load_list():
+    with my_cur.cursor() as my_cur:
+        my_cur.execute("select * from fruit_load_list")
+        return my_cur.fetchall()
+    
+ #add a vutton to load the fruit
+if streamlit.button('Get Fruit Load List'):
+    my_cnx = snowflake.connector.connect(**streamlit.secrets["snowflake"])
+    my_data_row = get_fruit_load_list()
+    streamlit.dataframe(my_data_row)
 
 ## Can You Add A Second Text Entry Box? 
 ## allow end user to add a fruit to the list
