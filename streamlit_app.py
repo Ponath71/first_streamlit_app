@@ -44,21 +44,8 @@ try:
     back_from_function = get_fruityvice_data(fruit_choice)
     streamlit.dataframe(back_from_function)
     
-except URLError as e:    
-  streamlit.error()
-#streamlit.write('The user entered ', fruit_choice)
-
-#import requests
-
-#streamlit.text(fruityvice_response)
-
-#streamlit.text(fruityvice_response.json())
-
-
-# write your own comment -what does the next line do? 
-
-# write your own comment - what does this do?
-
+except URLError as e:
+    streamlit.error()
 
 # dont run anything past here while we trouble shoot
 streamlit.stop()
